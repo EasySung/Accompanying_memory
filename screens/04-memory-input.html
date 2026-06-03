@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=390, initial-scale=1">
+<title>기억 입력</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.css">
+<link rel="stylesheet" href="../styles/tokens.css">
+<script src="https://unpkg.com/lucide@latest"></script>
+<style>
+  .nav-head { display:flex; align-items:center; gap:12px; padding:6px 20px 14px; }
+  .nav-head .back { width:42px; height:42px; border-radius:13px; background:#fff; box-shadow:var(--sh-sm);
+    display:flex; align-items:center; justify-content:center; flex:0 0 auto; }
+  .nav-head .back svg { width:22px; }
+  .nav-head .ttl { font-size:20px; font-weight:800; }
+
+  .sect { background:#fff; border:1px solid var(--border-soft); border-radius:var(--r-lg);
+    box-shadow:var(--sh-sm); padding:20px; }
+  .sect-h { display:flex; align-items:center; gap:10px; margin-bottom:16px; }
+  .sect-h .sn { font-size:17px; font-weight:800; }
+
+  .field { margin-top:14px; }
+  .field:first-of-type { margin-top:0; }
+  .field > label { font-size:14px; font-weight:700; color:var(--text-2); display:block; margin-bottom:8px; }
+  .inp { width:100%; min-height:54px; padding:0 16px; border-radius:var(--r-md);
+    background:var(--surface-warm); border:1.5px solid var(--border); font-family:var(--font);
+    font-size:16.5px; font-weight:600; color:var(--text); }
+  .inp::placeholder { color:var(--text-3); font-weight:500; }
+  textarea.inp { padding:14px 16px; min-height:96px; resize:none; line-height:1.5; }
+  .inp-row { display:flex; gap:10px; }
+
+  .seg { display:flex; gap:8px; flex-wrap:wrap; }
+  .seg .s { height:46px; padding:0 18px; border-radius:99px; background:var(--surface-warm);
+    border:1.5px solid var(--border); font-size:15.5px; font-weight:700; color:var(--text-2);
+    display:flex; align-items:center; }
+  .seg .s.on { background:var(--primary); color:#fff; border-color:var(--primary); }
+
+  .emos { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+  .emo { display:flex; align-items:center; gap:11px; min-height:58px; padding:0 16px; border-radius:var(--r-md);
+    border:2px solid var(--border); background:var(--surface-warm); font-size:16px; font-weight:700; cursor:pointer; }
+  .emo .et { width:34px; height:34px; border-radius:11px; display:flex; align-items:center; justify-content:center; flex:0 0 auto; }
+  .emo .et svg { width:19px; }
+  .emo.on { border-color:var(--accent); background:var(--accent-soft); }
+
+  .save-bar { padding:14px 22px 26px; }
+</style>
+</head>
+<body>
+<div class="screen" data-screen-label="기억 입력">
+  <div class="body" style="display:flex;flex-direction:column;">
+    <div class="nav-head">
+      <div class="back"><i data-lucide="chevron-left"></i></div>
+      <div class="ttl fill">기억 입력</div>
+      <span class="badge badge-info">자동 저장</span>
+    </div>
+
+    <div class="pad fill" style="overflow-y:auto;">
+      <p class="sub" style="margin-bottom:18px;">소중한 기억을 알려주시면<br>AI가 어머니와의 대화에 활용해요.</p>
+
+      <!-- 가족 정보 -->
+      <div class="sect">
+        <div class="sect-h"><span class="tile tile-sm tile-blue"><i data-lucide="users"></i></span><span class="sn">가족 정보</span></div>
+        <div class="field"><label>이름</label><input class="inp" placeholder="예) 김민수" value="김민수"></div>
+        <div class="field"><label>관계</label>
+          <div class="seg">
+            <span class="s on">아들</span><span class="s">딸</span><span class="s">손주</span><span class="s">배우자</span>
+          </div>
+        </div>
+        <div class="field"><label>어떻게 부르시나요?</label><input class="inp" placeholder="예) 우리 막내" value="우리 막내"></div>
+      </div>
+
+      <!-- 추억 에피소드 -->
+      <div class="sect" style="margin-top:14px;">
+        <div class="sect-h"><span class="tile tile-sm tile-coral"><i data-lucide="book-heart"></i></span><span class="sn">추억 에피소드</span></div>
+        <div class="field"><label>제목</label><input class="inp" placeholder="예) 가족 바닷가 여행"></div>
+        <div class="field inp-row">
+          <div class="fill"><label>날짜</label><input class="inp" placeholder="1998년 여름"></div>
+          <div class="fill"><label>장소</label><input class="inp" placeholder="강릉 바닷가"></div>
+        </div>
+        <div class="field"><label>내용</label><textarea class="inp" placeholder="그날의 이야기를 편하게 적어주세요…"></textarea></div>
+      </div>
+
+      <!-- 감정 태그 -->
+      <div class="sect" style="margin-top:14px;">
+        <div class="sect-h"><span class="tile tile-sm tile-rose"><i data-lucide="sparkles"></i></span><span class="sn">감정 태그</span></div>
+        <div class="emos">
+          <div class="emo on"><span class="et tile-sun"><i data-lucide="smile"></i></span>행복</div>
+          <div class="emo on"><span class="et tile-lav"><i data-lucide="cloud"></i></span>그리움</div>
+          <div class="emo"><span class="et tile-blue"><i data-lucide="award"></i></span>자랑스러움</div>
+          <div class="emo"><span class="et tile-rose"><i data-lucide="heart"></i></span>설렘</div>
+        </div>
+      </div>
+      <div style="height:8px;"></div>
+    </div>
+
+    <div class="save-bar">
+      <button class="btn btn-primary btn-block btn-lg"><i data-lucide="check"></i> 기억 저장하기</button>
+    </div>
+  </div>
+</div>
+<script src="../styles/app.js"></script>
+<script>mountChrome({});</script>
+</body>
+</html>

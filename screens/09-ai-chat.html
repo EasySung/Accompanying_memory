@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=390, initial-scale=1">
+<title>AI 대화</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.css">
+<link rel="stylesheet" href="../styles/tokens.css">
+<script src="https://unpkg.com/lucide@latest"></script>
+<style>
+  .chat-body { display:flex; flex-direction:column; padding:0; }
+  /* 헤더 */
+  .chat-head { display:flex; align-items:center; gap:12px; padding:6px 20px 14px;
+    background: linear-gradient(180deg,#EEF4FD, var(--bg)); }
+  .chat-head .back { width:42px; height:42px; border-radius:13px; background:#fff; box-shadow:var(--sh-sm);
+    display:flex; align-items:center; justify-content:center; }
+  .chat-head .back svg { width:22px; }
+  .ai-ava { width:46px; height:46px; border-radius:50%; flex:0 0 auto;
+    background: linear-gradient(155deg,#6BA0E8,var(--primary)); display:flex; align-items:center; justify-content:center;
+    box-shadow: 0 4px 12px rgba(74,134,216,.3); }
+  .ai-ava svg { width:24px; height:24px; color:#fff; fill:rgba(255,255,255,.25); }
+  .chat-head .nm { font-size:18px; font-weight:800; }
+  .chat-head .st { font-size:13px; font-weight:600; color:var(--success); display:flex; align-items:center; gap:5px; }
+  .chat-head .st .d { width:7px; height:7px; border-radius:50%; background:var(--success); }
+
+  /* 대화 영역 */
+  .chat-scroll { flex:1; overflow-y:auto; padding:12px 20px 8px; }
+  .chat-scroll::-webkit-scrollbar{ width:0; }
+  .daytag { text-align:center; font-size:12.5px; font-weight:600; color:var(--text-3); margin:6px 0 16px; }
+
+  .msg { display:flex; gap:10px; margin-bottom:16px; max-width:84%; }
+  .msg.ai { align-self:flex-start; }
+  .msg.me { align-self:flex-end; flex-direction:row-reverse; margin-left:auto; }
+  .msg .mava { width:34px; height:34px; border-radius:50%; flex:0 0 auto;
+    background: linear-gradient(155deg,#6BA0E8,var(--primary)); display:flex; align-items:center; justify-content:center; }
+  .msg .mava svg { width:18px; color:#fff; }
+  .bubble { padding:14px 17px; font-size:16.5px; font-weight:500; line-height:1.5; }
+  .msg.ai .bubble { background: var(--primary-soft); color:var(--text); border-radius: 6px 20px 20px 20px; }
+  .msg.me .bubble { background: var(--primary); color:#fff; border-radius: 20px 6px 20px 20px; box-shadow: var(--sh-primary); }
+  .btime { font-size:11px; font-weight:600; color:var(--text-3); align-self:flex-end; margin:0 2px; }
+
+  /* 사진을 포함한 AI 말풍선 */
+  .bubble .photo { width:100%; height:120px; margin-top:10px; border-radius:14px; }
+
+  /* 하단: 빠른답변 + 입력 */
+  .composer { padding:12px 18px 26px; background:rgba(246,242,235,.92); backdrop-filter: blur(8px);
+    border-top:1px solid var(--border-soft); }
+  .quicks { display:flex; gap:8px; overflow-x:auto; padding-bottom:12px; }
+  .quicks::-webkit-scrollbar{ height:0; }
+  .quick { flex:0 0 auto; height:42px; padding:0 16px; border-radius:99px; background:#fff;
+    border:1.5px solid var(--border); font-size:15px; font-weight:600; color:var(--primary-deep);
+    display:flex; align-items:center; gap:6px; white-space:nowrap; }
+  .quick svg { width:16px; }
+  .inbar { display:flex; align-items:center; gap:10px; }
+  .inbox { flex:1; height:54px; border-radius:99px; background:#fff; border:1.5px solid var(--border);
+    display:flex; align-items:center; padding:0 20px; font-size:16px; color:var(--text-3); font-weight:500; }
+  .mic, .send { width:54px; height:54px; border-radius:50%; flex:0 0 auto; display:flex; align-items:center; justify-content:center; }
+  .mic { background:#fff; border:1.5px solid var(--border); color:var(--text-2); }
+  .mic svg { width:23px; } 
+  .send { background:var(--primary); color:#fff; box-shadow:var(--sh-primary); }
+  .send svg { width:23px; }
+</style>
+</head>
+<body>
+<div class="screen" data-screen-label="AI 대화">
+  <div class="body chat-body">
+    <!-- 헤더 -->
+    <div class="chat-head">
+      <div class="back"><i data-lucide="chevron-left"></i></div>
+      <div class="ai-ava"><i data-lucide="heart"></i></div>
+      <div class="fill">
+        <div class="nm">기억이</div>
+        <div class="st"><span class="d"></span>지금 함께 있어요</div>
+      </div>
+    </div>
+
+    <!-- 대화 -->
+    <div class="chat-scroll">
+      <div class="daytag">오늘 오전 9:20</div>
+
+      <div class="msg ai">
+        <div class="mava"><i data-lucide="heart"></i></div>
+        <div class="bubble">순자님, 좋은 아침이에요!<br>오늘은 어떤 추억을 같이 떠올려 볼까요?</div>
+      </div>
+
+      <div class="msg me">
+        <div class="bubble">바닷가에 갔던 게 생각나네</div>
+      </div>
+
+      <div class="msg ai">
+        <div class="mava"><i data-lucide="heart"></i></div>
+        <div class="bubble">아, 가족과 함께 갔던 그 바닷가요?
+          <div class="ph photo"><span class="ph-label"><i data-lucide="image"></i>추억 사진</span></div>
+          그날 무엇이 가장 기억에 남으세요?
+        </div>
+      </div>
+
+      <div class="msg me">
+        <div class="bubble">막내가 모래성을 쌓았었지</div>
+      </div>
+    </div>
+
+    <!-- 하단 -->
+    <div class="composer">
+      <div class="quicks">
+        <div class="quick"><i data-lucide="sun"></i>날씨가 좋았어요</div>
+        <div class="quick"><i data-lucide="users"></i>가족과 함께였죠</div>
+        <div class="quick"><i data-lucide="smile"></i>정말 즐거웠어요</div>
+      </div>
+      <div class="inbar">
+        <div class="inbox">편하게 말씀해 보세요…</div>
+        <div class="mic"><i data-lucide="mic"></i></div>
+        <div class="send"><i data-lucide="arrow-up"></i></div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="../styles/app.js"></script>
+<script>
+  mountChrome({});
+  // 스크롤 하단 고정
+  const sc = document.querySelector('.chat-scroll');
+  if (sc) sc.scrollTop = sc.scrollHeight;
+</script>
+</body>
+</html>

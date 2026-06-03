@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=390, initial-scale=1">
+<title>인지 리포트</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.css">
+<link rel="stylesheet" href="../styles/tokens.css">
+<script src="https://unpkg.com/lucide@latest"></script>
+<style>
+  .nav-head { display:flex; align-items:center; gap:12px; padding:6px 20px 12px; }
+  .nav-head .back { width:42px; height:42px; border-radius:13px; background:#fff; box-shadow:var(--sh-sm);
+    display:flex; align-items:center; justify-content:center; flex:0 0 auto; }
+  .nav-head .back svg { width:22px; }
+  .nav-head .ttl { font-size:20px; font-weight:800; }
+
+  .pertabs { display:flex; gap:6px; background:#EDE6DB; padding:5px; border-radius:99px; margin:0 22px; }
+  .pt { flex:1; height:42px; border-radius:99px; font-size:15px; font-weight:700; color:var(--text-2);
+    display:flex; align-items:center; justify-content:center; }
+  .pt.on { background:#fff; color:var(--text); box-shadow:var(--sh-sm); }
+
+  /* 종합 점수 */
+  .score-card { background: linear-gradient(160deg,var(--primary),var(--primary-deep)); color:#fff;
+    border-radius:var(--r-xl); padding:24px; box-shadow:var(--sh-primary); position:relative; overflow:hidden; }
+  .score-card .glow { position:absolute; right:-30px; bottom:-40px; width:150px; height:150px; border-radius:50%;
+    background: radial-gradient(circle, rgba(255,255,255,.16), transparent 70%); }
+  .score-card .lbl { font-size:14px; font-weight:600; color:rgba(255,255,255,.82); }
+  .score-card .big { font-size:54px; font-weight:800; letter-spacing:-0.03em; line-height:1; margin-top:8px; }
+  .score-card .big span { font-size:20px; font-weight:600; opacity:.8; }
+
+  .sec-t { font-size:17px; font-weight:800; margin:26px 0 14px; }
+  .areas { background:#fff; border:1px solid var(--border-soft); border-radius:var(--r-lg); box-shadow:var(--sh-sm); padding:20px; }
+  .area + .area { margin-top:16px; }
+  .area .top { display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; }
+  .area .an { font-size:15.5px; font-weight:700; display:flex; align-items:center; gap:8px; white-space:nowrap; }
+  .area .an svg { width:18px; }
+  .area .av { font-size:15px; font-weight:800; }
+  .pbar { height:11px; border-radius:99px; background:var(--border-soft); overflow:hidden; }
+  .pbar > i { display:block; height:100%; border-radius:99px; }
+
+  /* 감정 분석 */
+  .emo-bar { display:flex; height:46px; border-radius:14px; overflow:hidden; }
+  .emo-bar .seg { display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:800; color:#fff; }
+  .emo-legend { display:flex; gap:16px; margin-top:12px; }
+  .emo-legend .it { display:flex; align-items:center; gap:7px; font-size:13.5px; font-weight:600; color:var(--text-2); }
+  .emo-legend .d { width:11px; height:11px; border-radius:4px; }
+
+  /* 키워드 */
+  .kw { display:flex; flex-wrap:wrap; gap:9px; }
+  .kw .k { height:40px; padding:0 16px; border-radius:99px; background:var(--accent-soft); color:var(--accent-deep);
+    font-size:15px; font-weight:700; display:flex; align-items:center; }
+  .kw .k.b { background:var(--primary-soft); color:var(--primary-deep); }
+
+  /* AI 코멘트 */
+  .ai-note { background:var(--primary-tint); border:1.5px solid var(--primary-soft); border-radius:var(--r-lg); padding:18px 20px; }
+  .ai-note .h { display:flex; align-items:center; gap:10px; margin-bottom:10px; }
+  .ai-note .h .nm { font-size:15px; font-weight:800; color:var(--primary-deep); }
+  .ai-note p { font-size:15.5px; font-weight:500; line-height:1.6; color:var(--text); }
+</style>
+</head>
+<body>
+<div class="screen" data-screen-label="인지 리포트">
+  <div class="body">
+    <div class="nav-head">
+      <div class="back"><i data-lucide="chevron-left"></i></div>
+      <div class="ttl fill">인지 변화 리포트</div>
+      <div class="back"><i data-lucide="share-2"></i></div>
+    </div>
+
+    <div class="pertabs">
+      <div class="pt">일간</div><div class="pt on">주간</div><div class="pt">월간</div>
+    </div>
+
+    <div class="pad" style="margin-top:18px;">
+      <!-- 종합 -->
+      <div class="score-card">
+        <div class="glow"></div>
+        <div class="row between center">
+          <div>
+            <div class="lbl">이번 주 종합 인지 점수</div>
+            <div class="big">82<span>점</span></div>
+          </div>
+          <span class="badge" style="background:rgba(255,255,255,.2);color:#fff;"><i data-lucide="trending-up" style="width:14px;"></i> 지난주 +4</span>
+        </div>
+      </div>
+
+      <!-- 영역별 -->
+      <div class="sec-t">영역별 점수</div>
+      <div class="areas">
+        <div class="area">
+          <div class="top"><span class="an"><i data-lucide="brain" style="color:var(--primary)"></i>기억 회상</span><span class="av">85</span></div>
+          <div class="pbar"><i style="width:85%;background:var(--primary)"></i></div>
+        </div>
+        <div class="area">
+          <div class="top"><span class="an"><i data-lucide="calendar-check" style="color:var(--mint)"></i>날짜 인지</span><span class="av">78</span></div>
+          <div class="pbar"><i style="width:78%;background:var(--mint)"></i></div>
+        </div>
+        <div class="area">
+          <div class="top"><span class="an"><i data-lucide="message-circle" style="color:var(--accent-deep)"></i>언어 능력</span><span class="av">88</span></div>
+          <div class="pbar"><i style="width:88%;background:var(--accent)"></i></div>
+        </div>
+        <div class="area">
+          <div class="top"><span class="an"><i data-lucide="target" style="color:var(--lav)"></i>주의 집중</span><span class="av">74</span></div>
+          <div class="pbar"><i style="width:74%;background:var(--lav)"></i></div>
+        </div>
+      </div>
+
+      <!-- 감정 분석 -->
+      <div class="sec-t">대화 감정 분석</div>
+      <div class="areas">
+        <div class="emo-bar">
+          <div class="seg" style="width:64%;background:var(--success)">64%</div>
+          <div class="seg" style="width:26%;background:var(--sun)">26%</div>
+          <div class="seg" style="width:10%;background:var(--text-3)">10%</div>
+        </div>
+        <div class="emo-legend">
+          <div class="it"><span class="d" style="background:var(--success)"></span>긍정</div>
+          <div class="it"><span class="d" style="background:var(--sun)"></span>중립</div>
+          <div class="it"><span class="d" style="background:var(--text-3)"></span>부정</div>
+        </div>
+      </div>
+
+      <!-- 키워드 -->
+      <div class="sec-t">자주 떠올린 기억</div>
+      <div class="kw">
+        <span class="k">바닷가</span><span class="k b">가족</span><span class="k">막내</span>
+        <span class="k b">고향집</span><span class="k">단풍</span><span class="k b">손주</span>
+      </div>
+
+      <!-- AI 코멘트 -->
+      <div class="sec-t">AI 분석 코멘트</div>
+      <div class="ai-note">
+        <div class="h">
+          <span class="ai-ava" style="width:36px;height:36px;border-radius:50%;background:linear-gradient(155deg,#6BA0E8,var(--primary));display:flex;align-items:center;justify-content:center;"><i data-lucide="heart" style="width:18px;color:#fff"></i></span>
+          <span class="nm">기억이의 분석</span>
+        </div>
+        <p>이번 주 어머니는 가족과 바닷가 추억을 특히 즐겁게 떠올리셨어요. 언어 능력이 안정적이고 긍정 감정이 늘었어요. 날짜 인지를 위해 매일 아침 대화를 이어가면 좋겠어요. 😊</p>
+      </div>
+      <div style="height:24px;"></div>
+    </div>
+  </div>
+</div>
+<script src="../styles/app.js"></script>
+<script>mountChrome({});</script>
+</body>
+</html>

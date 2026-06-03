@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=390, initial-scale=1">
+<title>역할 선택</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.css">
+<link rel="stylesheet" href="../styles/tokens.css">
+<script src="https://unpkg.com/lucide@latest"></script>
+<style>
+  .role .head { padding: 14px 26px 8px; }
+  .role .logo { display:flex; align-items:center; gap:9px; font-weight:800; font-size:18px; white-space:nowrap; }
+  .role .logo .lm { width:30px; height:30px; border-radius:9px;
+    background: linear-gradient(150deg,var(--primary),var(--primary-deep));
+    display:flex; align-items:center; justify-content:center; }
+  .role .logo .lm svg { width:17px; height:17px; color:#fff; fill:#fff; }
+
+  .role-card {
+    position: relative; overflow: hidden;
+    border-radius: var(--r-xl); padding: 26px;
+    cursor: pointer; transition: transform .15s ease, box-shadow .2s ease;
+    border: 1.5px solid transparent;
+  }
+  .role-card:active { transform: scale(.985); }
+  .rc-patient { background: linear-gradient(155deg, #EFF5FE 0%, #E2EDFB 100%); }
+  .rc-care    { background: linear-gradient(155deg, var(--accent-tint) 0%, var(--accent-soft) 100%); }
+
+  .role-card .deco { position:absolute; right:-30px; top:-30px; width:150px; height:150px;
+    border-radius:50%; opacity:.5; }
+  .rc-patient .deco { background: radial-gradient(circle at 30% 30%, #fff, transparent 70%); }
+  .rc-care .deco { background: radial-gradient(circle at 30% 30%, #fff, transparent 70%); }
+
+  .role-card .rc-tile { width:70px; height:70px; border-radius:22px;
+    display:flex; align-items:center; justify-content:center; box-shadow: var(--sh-sm); }
+  .rc-patient .rc-tile { background:#fff; color: var(--primary); }
+  .rc-care .rc-tile { background:#fff; color: var(--accent-deep); }
+  .role-card .rc-tile svg { width:36px; height:36px; }
+
+  .role-card h2 { font-size:24px; font-weight:800; margin-top:18px; letter-spacing:-0.02em; }
+  .role-card p { font-size:15.5px; font-weight:500; color: var(--text-2); margin-top:7px; line-height:1.5; }
+  .role-card .go { position:absolute; right:22px; bottom:22px; width:44px; height:44px; border-radius:50%;
+    background:#fff; display:flex; align-items:center; justify-content:center; box-shadow: var(--sh-sm); }
+  .rc-patient .go svg { color: var(--primary); } .rc-care .go svg { color: var(--accent-deep); }
+</style>
+</head>
+<body>
+<div class="screen" data-screen-label="역할 선택">
+  <div class="body">
+    <div class="head row between center">
+      <div class="logo">
+        <span class="lm"><i data-lucide="heart"></i></span>
+        기억동행
+      </div>
+    </div>
+
+    <div class="pad" style="margin-top:30px;">
+      <div class="eyebrow">시작하기</div>
+      <div class="display" style="margin-top:10px;">어떤 분이신가요?</div>
+      <p class="body-lg muted" style="margin-top:12px;">역할에 맞는 화면으로<br>편안하게 안내해 드릴게요.</p>
+
+      <div class="stack" style="margin-top:30px;">
+        <div class="role-card rc-patient">
+          <div class="deco"></div>
+          <div class="rc-tile"><i data-lucide="smile"></i></div>
+          <h2>이용자로 시작</h2>
+          <p>AI와 대화하고 추억을<br>함께 떠올려요</p>
+          <div class="go"><i data-lucide="arrow-right"></i></div>
+        </div>
+
+        <div class="role-card rc-care">
+          <div class="deco"></div>
+          <div class="rc-tile"><i data-lucide="heart-handshake"></i></div>
+          <h2>보호자로 시작</h2>
+          <p>가족의 변화를 살피고<br>기억을 함께 채워요</p>
+          <div class="go"><i data-lucide="arrow-right"></i></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="../styles/app.js"></script>
+<script>mountChrome({});</script>
+</body>
+</html>

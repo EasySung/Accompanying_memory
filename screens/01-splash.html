@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=390, initial-scale=1">
+<title>Splash</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.css">
+<link rel="stylesheet" href="../styles/tokens.css">
+<script src="https://unpkg.com/lucide@latest"></script>
+<style>
+  .splash {
+    background:
+      radial-gradient(120% 90% at 50% 0%, #5C95E2 0%, var(--primary) 45%, var(--primary-deep) 100%);
+    align-items: center;
+    justify-content: center;
+  }
+  .splash .body { display:flex; flex-direction:column; align-items:center; justify-content:center; }
+
+  /* logo mark — 두 개의 부드러운 원이 겹쳐 '동행'을 표현 */
+  .mark { position: relative; width: 132px; height: 96px; margin-bottom: 34px; }
+  .mark .blob {
+    position:absolute; border-radius:50%;
+    box-shadow: 0 14px 40px rgba(20,50,90,.25);
+    animation: float 4s ease-in-out infinite;
+  }
+  .mark .b1 { width:78px; height:78px; left:8px; top:6px;
+    background: linear-gradient(160deg,#FFFFFF,#EAF2FE); }
+  .mark .b2 { width:64px; height:64px; right:6px; top:20px;
+    background: linear-gradient(160deg,#FFD9BD,var(--accent));
+    animation-delay:.5s; mix-blend-mode: normal; opacity:.96; }
+  .mark .heart {
+    position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+    z-index:2; color: var(--primary);
+  }
+  .mark .heart svg { width:34px; height:34px; fill: var(--accent); stroke: var(--accent); }
+  @keyframes float { 0%,100%{ transform: translateY(0) } 50%{ transform: translateY(-7px) } }
+
+  .splash .title { color:#fff; font-size:40px; font-weight:800; letter-spacing:-0.03em; }
+  .splash .tag { color:rgba(255,255,255,.82); font-size:17px; font-weight:500; margin-top:12px; }
+
+  .dots { display:flex; gap:9px; margin-top:54px; }
+  .dots i { width:9px; height:9px; border-radius:50%; background:rgba(255,255,255,.5);
+    animation: pulse 1.2s ease-in-out infinite; }
+  .dots i:nth-child(2){ animation-delay:.2s } .dots i:nth-child(3){ animation-delay:.4s }
+  @keyframes pulse { 0%,100%{ opacity:.4; transform:scale(.8) } 50%{ opacity:1; transform:scale(1.15) } }
+
+  .splash .foot { position:absolute; bottom:50px; color:rgba(255,255,255,.6); font-size:13px; font-weight:600; letter-spacing:.04em; }
+</style>
+</head>
+<body>
+<div class="screen splash" data-screen-label="Splash">
+  <div class="body">
+    <div class="mark">
+      <div class="blob b1"></div>
+      <div class="blob b2"></div>
+      <div class="heart"><i data-lucide="heart"></i></div>
+    </div>
+    <div class="title">기억동행</div>
+    <div class="tag">함께 걷는 기억의 시간</div>
+    <div class="dots"><i></i><i></i><i></i></div>
+  </div>
+  <div class="foot">소중한 기억을 함께 지켜요</div>
+</div>
+<script src="../styles/app.js"></script>
+<script>mountChrome({ light: true, lightHome: true });</script>
+</body>
+</html>

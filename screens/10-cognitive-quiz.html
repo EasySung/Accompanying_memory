@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=390, initial-scale=1">
+<title>인지 퀴즈</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.css">
+<link rel="stylesheet" href="../styles/tokens.css">
+<script src="https://unpkg.com/lucide@latest"></script>
+<style>
+  .quiz-head { padding:6px 22px 0; }
+  .qh-top { display:flex; align-items:center; gap:14px; }
+  .qh-close { width:42px; height:42px; border-radius:13px; background:#fff; box-shadow:var(--sh-sm);
+    display:flex; align-items:center; justify-content:center; flex:0 0 auto; }
+  .qh-close svg { width:21px; color:var(--text-2); }
+  .qbar { flex:1; height:12px; border-radius:99px; background:var(--border-soft); overflow:hidden; }
+  .qbar > i { display:block; height:100%; border-radius:99px;
+    background: linear-gradient(90deg,var(--mint),var(--primary)); }
+  .qh-count { font-size:15px; font-weight:800; color:var(--text); flex:0 0 auto; }
+
+  .cat { display:inline-flex; align-items:center; gap:7px; margin-top:24px; white-space:nowrap;
+    height:34px; padding:0 15px; border-radius:99px; background:var(--mint-soft); color:var(--mint);
+    font-size:14px; font-weight:700; }
+  .cat svg { width:16px; }
+
+  .q-title { font-size:27px; font-weight:800; letter-spacing:-0.02em; line-height:1.3; margin-top:16px; }
+  .q-hint { font-size:15px; font-weight:500; color:var(--text-2); margin-top:10px; }
+
+  .opts { display:flex; flex-direction:column; gap:12px; margin-top:26px; }
+  .opt { display:flex; align-items:center; gap:14px; min-height:64px; padding:0 18px;
+    background:#fff; border:2px solid var(--border); border-radius:var(--r-lg); cursor:pointer;
+    font-size:18px; font-weight:700; transition: all .15s ease; }
+  .opt .k { width:34px; height:34px; border-radius:11px; background:var(--bg); color:var(--text-2);
+    display:flex; align-items:center; justify-content:center; font-size:16px; font-weight:800; flex:0 0 auto; }
+  .opt .mk { margin-left:auto; width:28px; height:28px; }
+  .opt.correct { border-color:var(--success); background:var(--success-soft); }
+  .opt.correct .k { background:var(--success); color:#fff; }
+  .opt.correct .mk { color:var(--success); }
+  .opt.wrong { border-color:var(--danger); background:var(--danger-soft); }
+  .opt.wrong .k { background:var(--danger); color:#fff; }
+
+  /* 정답 피드백 */
+  .feedback { margin:22px 22px 0; background:var(--success-soft); border:1.5px solid #CDEAD9;
+    border-radius:var(--r-lg); padding:18px 20px; display:flex; gap:14px; align-items:center; }
+  .feedback .fi { width:46px; height:46px; border-radius:50%; background:var(--success); color:#fff;
+    display:flex; align-items:center; justify-content:center; flex:0 0 auto; }
+  .feedback .fi svg { width:24px; }
+  .feedback .ft { font-size:18px; font-weight:800; color:var(--success); }
+  .feedback .fs { font-size:14px; font-weight:500; color:var(--text); margin-top:2px; }
+
+  .next-bar { padding:14px 22px 26px; }
+</style>
+</head>
+<body>
+<div class="screen" data-screen-label="인지 퀴즈">
+  <div class="body" style="display:flex;flex-direction:column;">
+    <div class="quiz-head">
+      <div class="qh-top">
+        <div class="qh-close"><i data-lucide="x"></i></div>
+        <div class="qbar"><i style="width:60%;"></i></div>
+        <div class="qh-count">3/5</div>
+      </div>
+    </div>
+
+    <div class="pad fill" style="overflow-y:auto;">
+      <span class="cat"><i data-lucide="calendar-heart"></i>계절 인지</span>
+      <div class="q-title">지금은 어떤 계절일까요?</div>
+      <div class="q-hint">창밖 풍경을 천천히 떠올려 보세요 🌿</div>
+
+      <div class="opts">
+        <div class="opt"><span class="k">1</span>봄</div>
+        <div class="opt correct"><span class="k">2</span>여름<i data-lucide="check-circle-2" class="mk"></i></div>
+        <div class="opt"><span class="k">3</span>가을</div>
+        <div class="opt"><span class="k">4</span>겨울</div>
+      </div>
+    </div>
+
+    <div class="feedback">
+      <div class="fi"><i data-lucide="check"></i></div>
+      <div>
+        <div class="ft">정답이에요!</div>
+        <div class="fs">맞아요, 지금은 여름이에요. 잘하셨어요 👏</div>
+      </div>
+    </div>
+    <div class="next-bar">
+      <button class="btn btn-primary btn-block btn-lg">다음 문제 <i data-lucide="arrow-right"></i></button>
+    </div>
+  </div>
+</div>
+<script src="../styles/app.js"></script>
+<script>mountChrome({});</script>
+</body>
+</html>

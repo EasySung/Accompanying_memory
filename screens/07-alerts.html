@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=390, initial-scale=1">
+<title>알림</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.css">
+<link rel="stylesheet" href="../styles/tokens.css">
+<script src="https://unpkg.com/lucide@latest"></script>
+<style>
+  .nav-head { display:flex; align-items:center; gap:12px; padding:6px 20px 12px; }
+  .nav-head .back { width:42px; height:42px; border-radius:13px; background:#fff; box-shadow:var(--sh-sm);
+    display:flex; align-items:center; justify-content:center; flex:0 0 auto; }
+  .nav-head .back svg { width:22px; }
+  .nav-head .ttl { font-size:20px; font-weight:800; }
+  .nav-head .read { font-size:14px; font-weight:700; color:var(--primary); }
+
+  .ftabs { display:flex; gap:8px; padding:6px 22px 6px; overflow-x:auto; }
+  .ftabs::-webkit-scrollbar{ height:0; }
+  .ft { flex:0 0 auto; height:40px; padding:0 16px; border-radius:99px; font-size:14.5px; font-weight:700;
+    background:#fff; border:1.5px solid var(--border); color:var(--text-2); display:flex; align-items:center; gap:6px; }
+  .ft .c { background:var(--bg); color:var(--text-2); font-size:12px; font-weight:800; min-width:20px; height:20px;
+    border-radius:99px; display:flex; align-items:center; justify-content:center; padding:0 5px; }
+  .ft.on { background:var(--text); color:#fff; border-color:var(--text); }
+  .ft.on .c { background:rgba(255,255,255,.25); color:#fff; }
+
+  .day-label { font-size:13px; font-weight:800; color:var(--text-3); margin:18px 0 12px; letter-spacing:.02em; }
+
+  .alert { display:flex; gap:14px; padding:16px; background:#fff; border:1px solid var(--border-soft);
+    border-radius:var(--r-lg); box-shadow:var(--sh-sm); position:relative; overflow:hidden; }
+  .alert.unread::before { content:''; position:absolute; left:0; top:0; bottom:0; width:4px; }
+  .alert.r-danger::before{ background:var(--danger);} .alert.r-warn::before{ background:var(--warning);}
+  .alert.r-info::before{ background:var(--primary);} .alert.r-ok::before{ background:var(--success);}
+  .alert .ai-t { flex:0 0 auto; }
+  .alert .ac { flex:1; }
+  .alert .ar { display:flex; align-items:center; gap:8px; margin-bottom:5px; }
+  .alert .atitle { font-size:16px; font-weight:800; }
+  .alert .atxt { font-size:14.5px; font-weight:500; color:var(--text-2); line-height:1.5; }
+  .alert .atime { font-size:12.5px; font-weight:600; color:var(--text-3); margin-top:7px; display:flex; align-items:center; gap:5px; }
+  .alert .atime svg { width:13px; }
+  .stack > * + * { margin-top:12px; }
+</style>
+</head>
+<body>
+<div class="screen" data-screen-label="알림">
+  <div class="body">
+    <div class="nav-head">
+      <div class="back"><i data-lucide="chevron-left"></i></div>
+      <div class="ttl fill">알림</div>
+      <span class="read">모두 읽음</span>
+    </div>
+
+    <div class="ftabs">
+      <div class="ft on">전체 <span class="c">5</span></div>
+      <div class="ft">위험 <span class="c">1</span></div>
+      <div class="ft">인지 <span class="c">2</span></div>
+      <div class="ft">대화 <span class="c">2</span></div>
+    </div>
+
+    <div class="pad">
+      <div class="day-label">오늘</div>
+      <div class="stack">
+        <div class="alert unread r-danger">
+          <span class="tile tile-md tile-coral ai-t" style="background:var(--danger-soft);color:var(--danger);"><i data-lucide="alert-triangle"></i></span>
+          <div class="ac">
+            <div class="ar"><span class="atitle">활동 미참여 감지</span><span class="badge badge-danger">위험</span></div>
+            <div class="atxt">어제 예정된 활동에 참여하지 않으셨어요. 안부를 확인해 보세요.</div>
+            <div class="atime"><i data-lucide="clock"></i>방금 전</div>
+          </div>
+        </div>
+
+        <div class="alert unread r-info">
+          <span class="tile tile-md tile-blue ai-t"><i data-lucide="messages-square"></i></span>
+          <div class="ac">
+            <div class="ar"><span class="atitle">AI 대화 완료</span><span class="badge badge-info">대화</span></div>
+            <div class="atxt">오늘 아침 12분간 즐겁게 대화하셨어요. 바닷가 추억을 떠올리셨네요.</div>
+            <div class="atime"><i data-lucide="clock"></i>오전 9:32</div>
+          </div>
+        </div>
+
+        <div class="alert unread r-ok">
+          <span class="tile tile-md tile-green ai-t"><i data-lucide="brain"></i></span>
+          <div class="ac">
+            <div class="ar"><span class="atitle">인지 퀴즈 5문제 완료</span><span class="badge badge-success">인지</span></div>
+            <div class="atxt">4문제를 맞히셨어요. 계절 인지 영역이 향상되고 있어요.</div>
+            <div class="atime"><i data-lucide="clock"></i>오전 10:08</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="day-label">어제</div>
+      <div class="stack">
+        <div class="alert r-warn">
+          <span class="tile tile-md tile-sun ai-t" style="background:var(--warning-soft);color:var(--warning);"><i data-lucide="calendar-x"></i></span>
+          <div class="ac">
+            <div class="ar"><span class="atitle">날짜 인지 점수 하락</span><span class="badge badge-warn">인지</span></div>
+            <div class="atxt">최근 날짜 인지 점수가 조금 낮아졌어요. 함께 달력을 보면 좋아요.</div>
+            <div class="atime"><i data-lucide="clock"></i>어제 오후 4:20</div>
+          </div>
+        </div>
+
+        <div class="alert r-info">
+          <span class="tile tile-md tile-blue ai-t"><i data-lucide="image"></i></span>
+          <div class="ac">
+            <div class="ar"><span class="atitle">새 추억 사진 반영</span><span class="badge badge-info">대화</span></div>
+            <div class="atxt">업로드하신 사진을 대화에 활용하기 시작했어요.</div>
+            <div class="atime"><i data-lucide="clock"></i>어제 오전 11:00</div>
+          </div>
+        </div>
+      </div>
+      <div style="height:24px;"></div>
+    </div>
+  </div>
+</div>
+<script src="../styles/app.js"></script>
+<script>mountChrome({});</script>
+</body>
+</html>

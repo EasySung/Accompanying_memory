@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=390, initial-scale=1">
+<title>이용자 홈</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.css">
+<link rel="stylesheet" href="../styles/tokens.css">
+<script src="https://unpkg.com/lucide@latest"></script>
+<style>
+  /* 인사 카드 — 시간대별 (오전: 따뜻한 블루) */
+  .greet { margin: 8px 22px 0; border-radius: var(--r-xl); padding: 26px 24px;
+    background: linear-gradient(160deg,#5C95E2 0%, var(--primary) 50%, var(--primary-deep) 100%);
+    color:#fff; position:relative; overflow:hidden; box-shadow: var(--sh-primary); }
+  .greet .sun { position:absolute; right:-24px; top:-24px; width:120px; height:120px; border-radius:50%;
+    background: radial-gradient(circle at 35% 35%, rgba(255,224,170,.9), rgba(240,148,90,.35) 60%, transparent 72%); }
+  .greet .when { font-size:15px; font-weight:600; color:rgba(255,255,255,.85); display:flex; align-items:center; gap:7px; }
+  .greet .when svg { width:18px; height:18px; }
+  .greet h1 { font-size:30px; font-weight:800; letter-spacing:-0.02em; margin-top:10px; line-height:1.25; }
+
+  /* 오늘의 한마디 */
+  .saying { margin: 16px 22px 0; background:var(--accent-tint); border:1.5px solid var(--accent-soft);
+    border-radius: var(--r-lg); padding: 18px 20px; display:flex; gap:14px; align-items:flex-start; }
+  .saying .q { width:42px; height:42px; border-radius:14px; background:#fff; color:var(--accent-deep);
+    display:flex; align-items:center; justify-content:center; flex:0 0 auto; box-shadow:var(--sh-sm); }
+  .saying .q svg { width:22px; }
+  .saying .lbl { font-size:13px; font-weight:700; color:var(--accent-deep); }
+  .saying p { font-size:17px; font-weight:600; line-height:1.5; margin-top:4px; color:var(--text); }
+
+  /* 메인 메뉴 2x2 */
+  .menu { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+  .mc { border-radius: var(--r-xl); padding: 22px; min-height: 150px; cursor:pointer;
+    display:flex; flex-direction:column; justify-content:space-between; position:relative; overflow:hidden;
+    transition: transform .14s ease; }
+  .mc:active { transform: scale(.97); }
+  .mc .mt { width:58px; height:58px; border-radius:18px; background:#fff; box-shadow:var(--sh-sm);
+    display:flex; align-items:center; justify-content:center; }
+  .mc .mt svg { width:30px; height:30px; }
+  .mc .mn { font-size:20px; font-weight:800; letter-spacing:-0.02em; }
+  .mc .md { font-size:13.5px; font-weight:500; color:var(--text-2); margin-top:3px; }
+  .mc-blue  { background:#EAF2FD; } .mc-blue .mt svg{ color:var(--primary); }
+  .mc-mint  { background:var(--mint-soft); } .mc-mint .mt svg{ color:var(--mint); }
+  .mc-coral { background:var(--accent-soft); } .mc-coral .mt svg{ color:var(--accent-deep); }
+  .mc-lav   { background:var(--lav-soft); } .mc-lav .mt svg{ color:var(--lav); }
+
+  /* 오늘 활동 현황 */
+  .today { background:#fff; border:1px solid var(--border-soft); border-radius:var(--r-lg);
+    box-shadow:var(--sh-sm); padding:20px; }
+  .today .ring { width:62px; height:62px; border-radius:50%; flex:0 0 auto;
+    background: conic-gradient(var(--success) 0% 66%, var(--border-soft) 66% 100%);
+    display:flex; align-items:center; justify-content:center; }
+  .today .ring .inner { width:48px; height:48px; border-radius:50%; background:#fff;
+    display:flex; align-items:center; justify-content:center; font-size:16px; font-weight:800; color:var(--success); }
+</style>
+</head>
+<body>
+<div class="screen" data-screen-label="이용자 홈">
+  <div class="body">
+    <!-- 인사 카드 -->
+    <div class="greet">
+      <div class="sun"></div>
+      <div class="when"><i data-lucide="sunrise"></i> 좋은 아침이에요</div>
+      <h1>순자님,<br>오늘 기분은 어떠세요?</h1>
+    </div>
+
+    <!-- 오늘의 한마디 -->
+    <div class="saying">
+      <div class="q"><i data-lucide="quote"></i></div>
+      <div>
+        <div class="lbl">오늘의 한마디</div>
+        <p>천천히 떠올려도 괜찮아요.<br>기억은 늘 그 자리에 있어요.</p>
+      </div>
+    </div>
+
+    <!-- 메인 메뉴 -->
+    <div class="pad" style="margin-top:22px;">
+      <div class="menu">
+        <div class="mc mc-blue">
+          <div class="mt"><i data-lucide="messages-square"></i></div>
+          <div><div class="mn">AI 대화</div><div class="md">함께 이야기해요</div></div>
+        </div>
+        <div class="mc mc-mint">
+          <div class="mt"><i data-lucide="brain"></i></div>
+          <div><div class="mn">기억 퀴즈</div><div class="md">즐겁게 풀어요</div></div>
+        </div>
+        <div class="mc mc-coral">
+          <div class="mt"><i data-lucide="images"></i></div>
+          <div><div class="mn">추억 앨범</div><div class="md">사진을 봐요</div></div>
+        </div>
+        <div class="mc mc-lav">
+          <div class="mt"><i data-lucide="sun"></i></div>
+          <div><div class="mn">오늘 일과</div><div class="md">하루를 확인해요</div></div>
+        </div>
+      </div>
+
+      <!-- 오늘 활동 현황 -->
+      <div class="today row center gap-16" style="margin-top:18px;">
+        <div class="ring"><div class="inner">2/3</div></div>
+        <div class="fill">
+          <div class="h3">오늘 잘하고 계세요!</div>
+          <div class="sub" style="margin-top:4px;">한 가지만 더 하면<br>오늘 활동을 모두 마쳐요.</div>
+        </div>
+      </div>
+      <div style="height:24px;"></div>
+    </div>
+  </div>
+</div>
+<script src="../styles/app.js"></script>
+<script>mountChrome({});</script>
+</body>
+</html>

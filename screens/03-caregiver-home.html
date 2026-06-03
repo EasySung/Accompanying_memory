@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=390, initial-scale=1">
+<title>보호자 홈</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.css">
+<link rel="stylesheet" href="../styles/tokens.css">
+<script src="https://unpkg.com/lucide@latest"></script>
+<style>
+  .care-head { padding: 6px 22px 26px; background: linear-gradient(180deg,#EEF4FD 0%, var(--bg) 100%); }
+  .bell { width:46px; height:46px; border-radius:15px; background:#fff; box-shadow:var(--sh-sm);
+    display:flex; align-items:center; justify-content:center; position:relative; }
+  .bell svg { width:23px; height:23px; color:var(--text); }
+  .bell .n { position:absolute; top:-4px; right:-4px; min-width:20px; height:20px; padding:0 5px;
+    border-radius:10px; background:var(--danger); color:#fff; font-size:12px; font-weight:800;
+    display:flex; align-items:center; justify-content:center; border:2px solid var(--bg); }
+
+  /* 환자 요약 카드 */
+  .patient-card { background: linear-gradient(160deg, var(--primary) 0%, var(--primary-deep) 100%);
+    border-radius: var(--r-xl); padding: 22px; color:#fff; box-shadow: var(--sh-primary); position:relative; overflow:hidden; }
+  .patient-card .glow { position:absolute; right:-40px; top:-40px; width:160px; height:160px; border-radius:50%;
+    background: radial-gradient(circle, rgba(255,255,255,.18), transparent 70%); }
+  .pc-avatar { width:54px; height:54px; border-radius:18px; background:rgba(255,255,255,.18);
+    display:flex; align-items:center; justify-content:center; }
+  .pc-avatar svg { width:28px; height:28px; color:#fff; }
+  .pc-name { font-size:20px; font-weight:800; letter-spacing:-0.02em; white-space:nowrap; }
+  .pc-date { font-size:13.5px; font-weight:500; color:rgba(255,255,255,.78); margin-top:3px; }
+  .pc-badge { background:rgba(255,255,255,.2); color:#fff; }
+  .pc-stat { background:rgba(255,255,255,.13); border-radius:16px; padding:14px 16px; }
+  .pc-stat .lbl { font-size:13px; font-weight:600; color:rgba(255,255,255,.8); }
+  .pc-stat .val { font-size:16px; font-weight:700; margin-top:4px; }
+  .pc-prog { height:10px; border-radius:99px; background:rgba(255,255,255,.22); overflow:hidden; margin-top:9px; }
+  .pc-prog > i { display:block; height:100%; border-radius:99px; background:#fff; }
+
+  .sec-title { font-size:18px; font-weight:800; letter-spacing:-0.02em; white-space:nowrap; }
+  .sec-more { font-size:14px; font-weight:600; color:var(--text-2); display:flex; align-items:center; gap:2px; white-space:nowrap; flex:0 0 auto; }
+  .sec-more svg { width:16px; height:16px; }
+
+  /* 오늘의 활동 */
+  .act { display:flex; align-items:center; gap:14px; padding:15px 16px; background:#fff;
+    border-radius:var(--r-md); border:1px solid var(--border-soft); box-shadow:var(--sh-sm); }
+  .act .at { font-size:16.5px; font-weight:700; }
+  .act .as { font-size:13.5px; font-weight:500; color:var(--text-2); margin-top:2px; }
+  .act .check { width:28px; height:28px; border-radius:50%; display:flex; align-items:center; justify-content:center; }
+  .act .check svg { width:17px; }
+  .check.done { background:var(--success); color:#fff; }
+  .check.todo { border:2px solid var(--border); color:transparent; }
+
+  /* 빠른 메뉴 */
+  .qgrid { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; }
+  .qm { display:flex; flex-direction:column; align-items:center; gap:9px; padding:14px 4px;
+    background:#fff; border-radius:var(--r-md); border:1px solid var(--border-soft); box-shadow:var(--sh-sm); cursor:pointer; }
+  .qm .qlbl { font-size:13px; font-weight:700; color:var(--text); }
+
+  /* 주간 차트 */
+  .chart { background:#fff; border-radius:var(--r-lg); border:1px solid var(--border-soft); box-shadow:var(--sh-sm); padding:20px; }
+  .bars { display:flex; align-items:flex-end; justify-content:space-between; gap:8px; height:120px; margin-top:16px; }
+  .bar-col { flex:1; display:flex; flex-direction:column; align-items:center; gap:8px; height:100%; justify-content:flex-end; }
+  .bar { width:60%; border-radius:8px 8px 4px 4px; background:var(--primary-soft); }
+  .bar.hi { background: linear-gradient(180deg,var(--primary),var(--primary-deep)); }
+  .bar-x { font-size:12px; font-weight:600; color:var(--text-2); }
+</style>
+</head>
+<body>
+<div class="screen" data-screen-label="보호자 홈">
+  <div class="body">
+    <!-- 헤더 -->
+    <div class="care-head">
+      <div class="row between center">
+        <div>
+          <div class="cap" style="color:var(--primary);">2026년 6월 2일 화요일</div>
+          <div style="font-size:24px;font-weight:800;letter-spacing:-0.02em;margin-top:4px;white-space:nowrap;">안녕하세요, 지영님</div>
+        </div>
+        <div class="bell"><i data-lucide="bell"></i><span class="n">3</span></div>
+      </div>
+    </div>
+
+    <div class="pad">
+      <!-- 환자 요약 카드 -->
+      <div class="patient-card">
+        <div class="glow"></div>
+        <div class="row between center">
+          <div class="row center gap-12">
+            <div class="pc-avatar"><i data-lucide="user-round"></i></div>
+            <div>
+              <div class="pc-name">김순자 어머니</div>
+              <div class="pc-date">오늘도 평온해요</div>
+            </div>
+          </div>
+          <span class="badge pc-badge"><span class="dot"></span>안정</span>
+        </div>
+        <div class="row gap-10" style="margin-top:18px;">
+          <div class="pc-stat fill">
+            <div class="lbl">마지막 대화</div>
+            <div class="val">오늘 오전 9:20</div>
+          </div>
+          <div class="pc-stat fill">
+            <div class="lbl">오늘 활동</div>
+            <div class="val">2 / 3 완료</div>
+          </div>
+        </div>
+        <div style="margin-top:16px;">
+          <div class="row between center">
+            <span style="font-size:14px;font-weight:600;color:rgba(255,255,255,.85);white-space:nowrap;">인지 점수</span>
+            <span style="font-size:17px;font-weight:800;">82<span style="font-size:13px;font-weight:600;opacity:.8;">/100</span></span>
+          </div>
+          <div class="pc-prog"><i style="width:82%;"></i></div>
+        </div>
+      </div>
+
+      <!-- 오늘의 활동 -->
+      <div class="row between center" style="margin-top:28px;">
+        <span class="sec-title">오늘의 활동</span>
+        <span class="sec-more">전체 <i data-lucide="chevron-right"></i></span>
+      </div>
+      <div class="stack" style="margin-top:14px;">
+        <div class="act">
+          <span class="tile tile-sm tile-blue"><i data-lucide="messages-square"></i></span>
+          <div class="fill"><div class="at">AI 회상 대화</div><div class="as">오전 9:20 · 완료</div></div>
+          <span class="check done"><i data-lucide="check"></i></span>
+        </div>
+        <div class="act">
+          <span class="tile tile-sm tile-mint"><i data-lucide="brain"></i></span>
+          <div class="fill"><div class="at">인지 퀴즈</div><div class="as">오전 10:05 · 완료</div></div>
+          <span class="check done"><i data-lucide="check"></i></span>
+        </div>
+        <div class="act">
+          <span class="tile tile-sm tile-coral"><i data-lucide="images"></i></span>
+          <div class="fill"><div class="at">추억 앨범 보기</div><div class="as">오후 3:00 예정</div></div>
+          <span class="check todo"><i data-lucide="check"></i></span>
+        </div>
+      </div>
+
+      <!-- 빠른 메뉴 -->
+      <div class="sec-title" style="margin-top:28px;">빠른 메뉴</div>
+      <div class="qgrid" style="margin-top:14px;">
+        <div class="qm"><span class="tile tile-md tile-lav"><i data-lucide="pen-line"></i></span><span class="qlbl">기억입력</span></div>
+        <div class="qm"><span class="tile tile-md tile-coral"><i data-lucide="image-plus"></i></span><span class="qlbl">사진업로드</span></div>
+        <div class="qm"><span class="tile tile-md tile-mint"><i data-lucide="line-chart"></i></span><span class="qlbl">리포트</span></div>
+        <div class="qm"><span class="tile tile-md tile-sun"><i data-lucide="bell-ring"></i></span><span class="qlbl">알림</span></div>
+      </div>
+
+      <!-- 주간 차트 -->
+      <div class="sec-title" style="margin-top:28px;">주간 인지 점수</div>
+      <div class="chart" style="margin-top:14px;">
+        <div class="row between center">
+          <span class="sub" style="font-weight:600;">이번 주 평균</span>
+          <span class="badge badge-success"><i data-lucide="trending-up" style="width:14px;height:14px;"></i>+4점</span>
+        </div>
+        <div class="bars">
+          <div class="bar-col"><div class="bar" style="height:55%;"></div><span class="bar-x">월</span></div>
+          <div class="bar-col"><div class="bar" style="height:62%;"></div><span class="bar-x">화</span></div>
+          <div class="bar-col"><div class="bar" style="height:58%;"></div><span class="bar-x">수</span></div>
+          <div class="bar-col"><div class="bar" style="height:70%;"></div><span class="bar-x">목</span></div>
+          <div class="bar-col"><div class="bar" style="height:66%;"></div><span class="bar-x">금</span></div>
+          <div class="bar-col"><div class="bar hi" style="height:82%;"></div><span class="bar-x">토</span></div>
+          <div class="bar-col"><div class="bar hi" style="height:80%;"></div><span class="bar-x">일</span></div>
+        </div>
+      </div>
+      <div style="height:24px;"></div>
+    </div>
+  </div>
+</div>
+<script src="../styles/app.js"></script>
+<script>mountChrome({});</script>
+</body>
+</html>

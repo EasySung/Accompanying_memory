@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=390, initial-scale=1">
+<title>사진 업로드</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.css">
+<link rel="stylesheet" href="../styles/tokens.css">
+<script src="https://unpkg.com/lucide@latest"></script>
+<style>
+  .nav-head { display:flex; align-items:center; gap:12px; padding:6px 20px 14px; }
+  .nav-head .back { width:42px; height:42px; border-radius:13px; background:#fff; box-shadow:var(--sh-sm);
+    display:flex; align-items:center; justify-content:center; flex:0 0 auto; }
+  .nav-head .back svg { width:22px; }
+  .nav-head .ttl { font-size:20px; font-weight:800; }
+
+  .lbl-h { font-size:17px; font-weight:800; margin-bottom:12px; display:flex; align-items:center; gap:9px; }
+
+  .pgrid { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; }
+  .pcell { aspect-ratio:1; border-radius:var(--r-md); overflow:hidden; position:relative; }
+  .pcell .rm { position:absolute; top:6px; right:6px; width:24px; height:24px; border-radius:50%;
+    background:rgba(43,40,36,.6); color:#fff; display:flex; align-items:center; justify-content:center; }
+  .pcell .rm svg { width:14px; }
+  .add-cell { aspect-ratio:1; border-radius:var(--r-md); border:2px dashed var(--border);
+    background:var(--surface-warm); display:flex; flex-direction:column; align-items:center; justify-content:center;
+    gap:7px; color:var(--primary); cursor:pointer; }
+  .add-cell svg { width:28px; } .add-cell span { font-size:13px; font-weight:700; }
+
+  .sect { background:#fff; border:1px solid var(--border-soft); border-radius:var(--r-lg);
+    box-shadow:var(--sh-sm); padding:20px; margin-top:18px; }
+  .field { margin-top:14px; } .field:first-child{ margin-top:0; }
+  .field > label { font-size:14px; font-weight:700; color:var(--text-2); display:flex; align-items:center; gap:6px; margin-bottom:8px; }
+  .field > label svg { width:16px; }
+  .inp { width:100%; min-height:54px; padding:0 16px; border-radius:var(--r-md); background:var(--surface-warm);
+    border:1.5px solid var(--border); font-family:var(--font); font-size:16.5px; font-weight:600; color:var(--text); }
+  .inp::placeholder{ color:var(--text-3); font-weight:500; }
+  .tagrow { display:flex; gap:8px; flex-wrap:wrap; }
+  .tg { height:44px; padding:0 16px; border-radius:99px; background:var(--surface-warm); border:1.5px solid var(--border);
+    font-size:15px; font-weight:700; color:var(--text-2); display:flex; align-items:center; gap:6px; }
+  .tg svg { width:15px; }
+  .tg.on { background:var(--accent); color:#fff; border-color:var(--accent); }
+  .save-bar { padding:14px 22px 26px; }
+</style>
+</head>
+<body>
+<div class="screen" data-screen-label="사진 업로드">
+  <div class="body" style="display:flex;flex-direction:column;">
+    <div class="nav-head">
+      <div class="back"><i data-lucide="chevron-left"></i></div>
+      <div class="ttl fill">사진 업로드</div>
+    </div>
+
+    <div class="pad fill" style="overflow-y:auto;">
+      <div class="lbl-h"><span class="tile tile-sm tile-coral"><i data-lucide="image-plus"></i></span>사진 선택 <span class="sub" style="font-weight:600;">3장</span></div>
+      <div class="pgrid">
+        <div class="add-cell"><i data-lucide="plus"></i><span>추가</span></div>
+        <div class="pcell ph"><span class="ph-label"><i data-lucide="image"></i>사진</span><div class="rm"><i data-lucide="x"></i></div></div>
+        <div class="pcell ph"><span class="ph-label"><i data-lucide="image"></i>사진</span><div class="rm"><i data-lucide="x"></i></div></div>
+        <div class="pcell ph"><span class="ph-label"><i data-lucide="image"></i>사진</span><div class="rm"><i data-lucide="x"></i></div></div>
+      </div>
+
+      <div class="sect">
+        <div class="field"><label><i data-lucide="calendar"></i>날짜</label><input class="inp" placeholder="언제의 사진인가요?" value="1998년 여름"></div>
+        <div class="field"><label><i data-lucide="map-pin"></i>위치</label><input class="inp" placeholder="어디에서 찍으셨나요?" value="강릉 경포대"></div>
+        <div class="field"><label><i data-lucide="tag"></i>태그</label>
+          <div class="tagrow">
+            <span class="tg on"><i data-lucide="users"></i>가족</span>
+            <span class="tg on"><i data-lucide="plane"></i>여행</span>
+            <span class="tg"><i data-lucide="sun"></i>일상</span>
+            <span class="tg"><i data-lucide="gift"></i>명절</span>
+          </div>
+        </div>
+      </div>
+      <div style="height:8px;"></div>
+    </div>
+
+    <div class="save-bar">
+      <button class="btn btn-accent btn-block btn-lg"><i data-lucide="upload"></i> 추억에 담기</button>
+    </div>
+  </div>
+</div>
+<script src="../styles/app.js"></script>
+<script>mountChrome({});</script>
+</body>
+</html>
